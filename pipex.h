@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 14:54:17 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/11 14:55:57 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/15 17:40:32 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,13 @@
 # include <stdio.h>
 # include <sys/wait.h>
 # include <stdlib.h>
+
+typedef struct s_data
+{
+	char	*file[2];
+	char	**cmd;
+	char	**arg;
+}			t_data;
+
 
 #endif /* PIPEX_H */

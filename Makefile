@@ -3,7 +3,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g
 NAME = pipex
 LIBFT = libft/libft.a
-pipex_SRC = main.c 
+pipex_SRC = main.c
 pipex_OBJ = $(pipex_SRC:.c=.o)
 #INCLUDES_DIR = -I./includes -I./libft/includes -I./minilibx_macos/includes
 #pas necessaire parceque -lft -lmlx dans la ligne cc
