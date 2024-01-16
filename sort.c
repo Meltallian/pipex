@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 11:22:56 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/15 13:58:28 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/16 15:11:12 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int	main()
 	if (pid == 0)
 	{
 		dup2(fds[0], STDIN_FILENO); //fds[0] donates its data to the file descriptor 0 std0. fds[0] is the read end of the pipe
-		close(fds[0]); //close the read end of the pipe. Unused by the child. since stdin is now the read end of the pipe
-		close(fds[1]); //close the write end of the pipe. Unused by the child.
+		close(fds[0]); //close the to read end of the pipe. Unused by the child. since stdin is now the read end of the pipe
+		close(fds[1]); //close the to write end of the pipe. Unused by the child.
 		char *argv[] = {(char *)"sort", NULL}; //create argument vector for the sort command
 		if (execvp(argv[0], argv) < 0)
 			exit (0); //execute the sort command and exit if it fails;
