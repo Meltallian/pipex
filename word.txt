@@ -2,3 +2,5 @@ pear
 peach
 berry
 apple
+Cherry
+Pogger
