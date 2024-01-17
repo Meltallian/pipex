@@ -3,4 +3,5 @@ peach
 berry
 apple
 Cherry
-Pogger
+Hogger
+Schlonger

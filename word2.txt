@@ -1,17 +1,7 @@
-total 192
-drwxr-xr-x  103 jbidaux   3502 Jan 15 13:54 libft
--rw-r--r--    1 jbidaux      0 Jan 16 10:36 file1
--rw-r--r--    1 jbidaux      0 Jan 16 16:31 file2m
--rw-r--r--    1 jbidaux   2329 Jan 17 12:19 path.c
--rw-r--r--    1 jbidaux   1140 Jan 17 12:20 utils.c
--rw-r--r--    1 jbidaux   1584 Jan 17 12:20 pipex.h
--rw-r--r--    1 jbidaux    796 Jan 17 12:21 Makefile
--rw-r--r--    1 jbidaux   2720 Jan 17 12:21 utils.o
--rw-r--r--    1 jbidaux   5184 Jan 17 12:21 path.o
--rw-r--r--    1 jbidaux      0 Jan 17 13:12 file2make
--rw-r--r--    1 jbidaux      0 Jan 17 13:13 file2
--rw-r--r--    1 jbidaux     36 Jan 17 14:15 word.txt
--rw-r--r--    1 jbidaux   4844 Jan 17 14:18 main.o
--rwxr-xr-x    1 jbidaux  51416 Jan 17 14:18 pipex
--rw-r--r--    1 jbidaux   2441 Jan 17 14:43 main.c
--rw-r--r--    1 jbidaux      0 Jan 17 14:57 word2.txt
+Cherry
+Hogger
+Schlonger
+apple
+berry
+peach
+pear

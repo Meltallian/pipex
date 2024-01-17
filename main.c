@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:35:24 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/17 14:43:09 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/17 16:42:02 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,25 @@ int	main(int ac, char *av[], char *envp[])
 	{
 		dup2(data.file1, STDIN_FILENO);
 		close(data.file1);
-		dup2(data.file2, STDOUT_FILENO);
+		dup2(fds[1], STDOUT_FILENO);
 		close(data.file2);
 		close(fds[1]);
 		close(fds[0]);
 		close(data.file2);
 		if (execve(data.cmd[0].split[0], data.cmd[0].split, envp) < 0)
+		{
+			perror("Could not execve");
+			exit(EXIT_FAILURE);
+		}
+	}
+	if (deuxieme child)
+	{
+		dup2(fds[0], STDIN_FILENO);
+		close (fds[0]);
+		close (fds[1]);
+		close (data.file1);
+		dup2(STDOUT_FILENO, data.file2);
+		if (execve(data.cmd[1].split[0], data.cmd[0].split, envp) < 0)
 		{
 			perror("Could not execve");
 			exit(EXIT_FAILURE);
