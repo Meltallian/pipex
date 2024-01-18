@@ -1,7 +1,7 @@
-Cherry
-Hogger
-Schlonger
-apple
-berry
-peach
 pear
+peach
+berry
+apple
+Schlonger
+Hogger
+Cherry

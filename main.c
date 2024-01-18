@@ -25,61 +25,74 @@ int	ini(t_data *data, int ac, char **av)
 	return (0);
 }
 
+void	child_1(t_data *data, int *fds, char **envp)
+{
+	data->pid = fork();
+	if (data->pid == -1)
+	{
+		perror("fork error");
+		exit(EXIT_FAILURE);
+	}
+	if (data->pid == 0)
+	{
+		dup2(data->file1, STDIN_FILENO);
+		dup2(fds[1], STDOUT_FILENO);
+		close(data->file1);
+		close(data->file2);
+		close(fds[1]);
+		close(fds[0]);
+		if (execve(data->cmd[0].split[0], data->cmd[0].split, envp) < 0)
+		{
+			perror("Could not execve");
+			exit(EXIT_FAILURE);
+		}
+	}
+}
+
+void	child_2(t_data *data, int *fds, char **envp)
+{
+	data->pid2 = fork();
+	if (data->pid2 == -1)
+	{
+		perror("fork error");
+		exit(EXIT_FAILURE);
+	}
+	if (data->pid2 == 0)
+	{
+		dup2(fds[0], STDIN_FILENO);
+		dup2(data->file2, STDOUT_FILENO);
+		close (fds[0]);
+		close (data->file1);
+		close(data->file2);
+		if (execve(data->cmd[1].split[0], data->cmd[1].split, envp) < 0)
+		{
+			perror("Could not execve");
+			exit(EXIT_FAILURE);
+		}
+	}
+}
+
 int	main(int ac, char *av[], char *envp[])
 {
 	t_data	data;
 	int		fds[2];
-	pid_t	pid;
 	int		status;
-	pid_t	wpid;
 
 	ini(&data, ac, av);
 	if (pipe(fds) == -1)
 	{
-		perror("pipe");
+		perror("pipe error");
 		exit(EXIT_FAILURE);
 	}
-	pid = fork();
-	if (pid == -1)
-	{
-		perror("fork");
-		exit(EXIT_FAILURE);
-	}
-	if (pid == 0)
-	{
-		dup2(data.file1, STDIN_FILENO);
-		close(data.file1);
-		dup2(fds[1], STDOUT_FILENO);
-		close(data.file2);
-		close(fds[1]);
-		close(fds[0]);
-		close(data.file2);
-		if (execve(data.cmd[0].split[0], data.cmd[0].split, envp) < 0)
-		{
-			perror("Could not execve");
-			exit(EXIT_FAILURE);
-		}
-	}
-	if (deuxieme child)
-	{
-		dup2(fds[0], STDIN_FILENO);
-		close (fds[0]);
-		close (fds[1]);
-		close (data.file1);
-		dup2(STDOUT_FILENO, data.file2);
-		if (execve(data.cmd[1].split[0], data.cmd[0].split, envp) < 0)
-		{
-			perror("Could not execve");
-			exit(EXIT_FAILURE);
-		}
-	}
+	child_1(&data, fds, envp);
 	close(fds[1]);
+	child_2(&data, fds, envp);
 	close(fds[0]);
 	close(data.file1);
-	close(data.file2);
-	wpid = waitpid(pid, &status, 0); //wait for the child to finish
+	waitpid(data.pid, &status, 0); //wait for the child to finish
+	waitpid(data.pid2, &status, 0);
 	clean(&data);
-	if (wpid == pid && WIFEXITED(status))
+	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));
 	else
 		return (-1);

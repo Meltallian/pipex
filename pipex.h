@@ -39,6 +39,8 @@ typedef struct s_data
 	int		file2;
 	char	**path;
 	char	*temp;
+	pid_t	pid;
+	pid_t	pid2;
 }			t_data;
 
 void	sep_arg(t_data *data);
@@ -46,5 +48,7 @@ int		path_helper(t_data *data, int k, char *full_path);
 int		path(t_data *data);
 void	parsing(t_data *data, int ac, char **av);
 void	clean(t_data *data);
+void	child_1(t_data *data, int *fds, char **envp);
+void	child_2(t_data *data, int *fds, char **envp);
 
 #endif /* PIPEX_H */
