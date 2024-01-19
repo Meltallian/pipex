@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 14:54:17 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/17 12:20:36 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/19 12:29:15 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,7 @@ void	parsing(t_data *data, int ac, char **av);
 void	clean(t_data *data);
 void	child_1(t_data *data, int *fds, char **envp);
 void	child_2(t_data *data, int *fds, char **envp);
+void	qawk(t_data *data);
+char	**ft_split_2(const char *s, const char c);
 
 #endif /* PIPEX_H */

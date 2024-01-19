@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:17:18 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/17 12:19:36 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/19 12:30:38 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,14 @@ void	sep_arg(t_data *data)
 	i = 0;
 	while (i < data->cmd_y)
 	{
-		data->cmd[i].split = ft_split(data->cmd[i].cmd, ' ');
+		if (ft_strncmp(data->cmd[i].cmd, "awk", 3) == 0)
+		{
+			data->cmd[i].split = ft_split_2(data->cmd[i].cmd, ' ');
+		}
+		else
+		{
+			data->cmd[i].split = ft_split(data->cmd[i].cmd, ' ');
+		}
 		i++;
 	}
 }

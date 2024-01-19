@@ -6,12 +6,11 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:35:24 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/17 16:42:02 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/19 12:41:31 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-//       /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Library/Apple/usr/bin
 
 int	ini(t_data *data, int ac, char **av)
 {
@@ -19,9 +18,10 @@ int	ini(t_data *data, int ac, char **av)
 	sep_arg(data);
 	if (path(data) < 0)
 	{
-		perror("wrong commands");
+		perror("command not found");
 		exit(0);
 	}
+	qawk(data);
 	return (0);
 }
 
@@ -89,7 +89,8 @@ int	main(int ac, char *av[], char *envp[])
 	child_2(&data, fds, envp);
 	close(fds[0]);
 	close(data.file1);
-	waitpid(data.pid, &status, 0); //wait for the child to finish
+	close(data.file2);
+	waitpid(data.pid, &status, 0);
 	waitpid(data.pid2, &status, 0);
 	clean(&data);
 	if (WIFEXITED(status))
@@ -98,7 +99,8 @@ int	main(int ac, char *av[], char *envp[])
 		return (-1);
 }
 
-// PATH= /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Library/Apple/usr/bin
+// PATH= /usr/local/bin:/usr/bin:/bin:/usr/sbin:
+// /sbin:/usr/local/munki:/Library/Apple/usr/bin
 
 /* 	i = 0;
 	while(i < ac - 3)
