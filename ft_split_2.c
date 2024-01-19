@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 12:07:27 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/19 12:29:51 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/19 15:57:59 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,10 @@ static size_t	word_count(const char *s, const char c)
 	size_t	i;
 	size_t	j;
 	size_t	index;
-	int		trig;
-	bool is_trig;
+	bool	is_trig;
 
 	i = 0;
 	j = 0;
-	trig = 0;
 	index = 0;
 	is_trig = false;
 	while (s[i])
@@ -57,26 +55,38 @@ static char	*ft_buff(const char *str, size_t start, size_t end)
 	return (buff);
 }
 
+void	helper_split_2(size_t *i, size_t *j, bool *is_trig, int *index)
+{
+	*i = 0;
+	*j = 0;
+	*is_trig = false;
+	*index = -1;
+}
+
+int	helper2_split_2(const char *s, char **split)
+{
+	if (!s)
+		return (0);
+	if (!split)
+		return (0);
+	return (1);
+}
+
 char	**ft_split_2(const char *s, const char c)
 {
 	size_t	i;
 	size_t	j;
 	int		index;
 	char	**split;
-	bool is_trig;
+	bool	is_trig;
 
-	i = 0;
-	j = 0;
-	index = -1;
-	is_trig = false;
-	if (!s)
-		return (0);
+	helper_split_2(&i, &j, &is_trig, &index);
 	split = ft_calloc((word_count(s, c) + 1), sizeof(char *));
-	if (!split)
+	if (helper2_split_2(s, split) == 0)
 		return (0);
 	while (i <= ft_strlen(s))
 	{
-		if(s[i]== 39)
+		if (s[i] == 39)
 			is_trig = !is_trig;
 		if (s[i] != c && index < 0)
 			index = i;

@@ -1,6 +1,6 @@
 pear
-peach
-berry
+peaches
+berries
 apple
 Cherry
 Hogger

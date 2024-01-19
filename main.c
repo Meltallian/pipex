@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:35:24 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/19 12:41:31 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/19 16:01:01 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@ int	ini(t_data *data, int ac, char **av)
 		perror("command not found");
 		exit(0);
 	}
+/* 	int	i = 0;
+	while (data->cmd[1].split[i])
+	{
+		printf("%s", data->cmd[1].split[i]);
+		printf("\n");
+		i++;
+	} */
 	qawk(data);
 	return (0);
 }
