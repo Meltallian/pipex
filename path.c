@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:17:18 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/22 11:01:43 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/22 12:19:07 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,16 +97,20 @@ void	parsing(t_data *data, int ac, char **av)
 		i++;
 	}
 	data->cmd_y = ac - 3;
-	if (access(av[1], R_OK) != 0)
-		ft_printf("permission denied: %s", av[1]);
-	else if (access(av[1], F_OK) != 0)
-		ft_printf("no such file or directory: %s", av[1]);
-	else
-		data->file1 = open(av[1], O_RDONLY);
-	data->file2 = open(av[data->cmd_y + 2], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (data->file2 < 0)
+	data->file1 = open(av[1], O_RDONLY);
+	if (access(av[1], F_OK) != 0)
+		ft_printf("no such file or directory: %s\n", av[1]);
+	else if (access(av[1], R_OK) != 0)
+		ft_printf("permission denied: %s\n", av[1]);
+	data->file2 = open(av[data->cmd_y + 2], O_WRONLY | O_CREAT | O_TRUNC , 0644);
+	if (access(av[data->cmd_y + 2], W_OK != 0))
 	{
-		perror("Error opening file2");
+		ft_printf("permission denied: %s\n", av[data->cmd_y + 2]);
+		exit (EXIT_FAILURE);
+	}
+	else if (open(av[data->cmd_y + 2], O_DIRECTORY > -1))
+	{
+		ft_printf("is a directory: %s\n", av[data->cmd_y + 2]);
 		exit (EXIT_FAILURE);
 	}
 }

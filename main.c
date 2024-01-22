@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:35:24 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/22 10:42:14 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/22 11:37:58 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	child_1(t_data *data, int *fds, char **envp)
 		close(data->file2);
 		close(fds[1]);
 		close(fds[0]);
+		if (data->file1 == -1)
+			exit(EXIT_FAILURE);
 		if (execve(data->cmd[0].split[0], data->cmd[0].split, envp) < 0)
 		{
 			perror("Could not execve");
