@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:35:24 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/22 16:12:37 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/22 17:06:58 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ int	main(int ac, char *av[], char *envp[])
 {
 	t_data	data;
 	int		fds[2];
-	int		status;
 
 	ini(&data, ac, av);
 	if (pipe(fds) == -1)
@@ -99,43 +98,6 @@ int	main(int ac, char *av[], char *envp[])
 	close(fds[0]);
 	close(data.file1);
 	close(data.file2);
-	waitpid(data.pid, &status, 0);
-	waitpid(data.pid2, &status, 0);
 	clean(&data);
-	if (WIFEXITED(status))
-		return (WEXITSTATUS(status));
-	else
-		return (-1);
+	return (wait_last(data.pid2));
 }
-
-// PATH= /usr/local/bin:/usr/bin:/bin:/usr/sbin:
-// /sbin:/usr/local/munki:/Library/Apple/usr/bin
-
-/* 	i = 0;
-	while(i < ac - 3)
-	{
-		ft_printf("%s\n", data.cmd[i].cmd);
-		i++;
-	}
-	i = 0;
-	while (i < 4)
-	{
-		SS(data.cmd[0].split[i]);
-		SS("\n");
-		i++;
-	}
-	i = 0;
-	while (i < 4)
-	{
-		SS(data.cmd[1].split[i]);
-		SS("\n");
-		i++;
-	}
-	i = 0;
-	while (i < 4)
-	{
-		SS(data.cmd[2].split[i]);
-		SS("\n");
-		i++;
-	} */
-	// SS(getenv("PATH"));

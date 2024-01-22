@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:19:59 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/22 16:13:40 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/22 17:05:43 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	sep_arg(t_data *data)
 	}
 }
 
-
 void	qawk(t_data *data)
 {
 	int		i;
@@ -69,11 +68,28 @@ void	qawk(t_data *data)
 			{
 				if (data->cmd[i].split[j][0] == 39)
 				{
-					data->cmd[i].split[j] = ft_strtrim(data->cmd[i].split[j], "'");
+					data->cmd[i].split[j]
+						= ft_strtrim(data->cmd[i].split[j], "'");
 				}
 				j++;
 			}
 		}
 		i++;
 	}
+}
+
+int	wait_last(int last_pid)
+{
+	int	status;
+	int	pid;
+
+	while (1)
+	{
+		pid = waitpid(-1, &status, WNOHANG);
+		if (pid == -1)
+			break ;
+		else if (pid == last_pid)
+			return (WEXITSTATUS(status));
+	}
+	return (42);
 }

@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 14:54:17 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/22 16:16:15 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/22 17:05:10 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@
 # include "libft/libft.h"
 # include <errno.h>
 
-# define PP ft_printf("prout")
-# define DD(xxx) ft_printf("%d", xxx)
-# define SS(xxx) ft_printf("%s", xxx)
-# define CC(xxx) ft_printf("%c", xxx)
+// # define PP ft_printf("prout")
+// # define DD(xxx) ft_printf("%d", xxx)
+// # define SS(xxx) ft_printf("%s", xxx)
+// # define CC(xxx) ft_printf("%c", xxx)
 
 typedef struct s_cmd
 {
@@ -47,7 +47,7 @@ typedef struct s_data
 void	sep_arg(t_data *data);
 int		path_helper(t_data *data, int k, char *full_path);
 int		path(t_data *data);
-void	helper_fd_files(int ac, char **av);
+void	helper_fd_files(int ac, char **av, int i);
 void	fd_files(int ac, char **av);
 void	parsing(t_data *data, int ac, char **av);
 void	clean(t_data *data);
@@ -55,5 +55,6 @@ void	child_1(t_data *data, int *fds, char **envp);
 void	child_2(t_data *data, int *fds, char **envp);
 void	qawk(t_data *data);
 char	**ft_split_2(const char *s, const char c);
+int		wait_last(int last_pid);
 
 #endif /* PIPEX_H */
