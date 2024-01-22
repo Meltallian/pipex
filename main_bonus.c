@@ -6,12 +6,12 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 09:53:51 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/19 14:23:27 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/22 16:12:12 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
+/*
 int	ini(t_data *data, int ac, char **av)
 {
 	parsing(data, ac, av);
@@ -80,7 +80,7 @@ int	main(int ac, char *av[], char *envp[])
 	}
 	close(fds[0]);
 	close(data.file1);
-	waitpid(pid, &status, 0); 
+	waitpid(pid, &status, 0);
 	waitpid(pid2, &status, 0);
 
 	clean(&data);
@@ -88,4 +88,4 @@ int	main(int ac, char *av[], char *envp[])
 		return (WEXITSTATUS(status));
 	else
 		return (-1);
-}
+} */

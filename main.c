@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:35:24 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/22 11:37:58 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/22 16:12:37 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,18 @@
 
 int	ini(t_data *data, int ac, char **av)
 {
+	if (ac != 5)
+	{
+		perror("wrong synthax\n");
+		exit (1);
+	}
 	parsing(data, ac, av);
 	sep_arg(data);
 	if (path(data) < 0)
 	{
-		ft_printf("command not found");
-		exit(EXIT_FAILURE);
+		perror("command not found\n");
+		exit(0);
 	}
-/* 	int	i = 0;
-	while (data->cmd[1].split[i])
-	{
-		printf("%s", data->cmd[1].split[i]);
-		printf("\n");
-		i++;
-	} */
 	qawk(data);
 	return (0);
 }
@@ -38,7 +36,7 @@ void	child_1(t_data *data, int *fds, char **envp)
 	if (data->pid == -1)
 	{
 		perror("fork error");
-		exit(EXIT_FAILURE);
+		exit(0);
 	}
 	if (data->pid == 0)
 	{
@@ -49,11 +47,11 @@ void	child_1(t_data *data, int *fds, char **envp)
 		close(fds[1]);
 		close(fds[0]);
 		if (data->file1 == -1)
-			exit(EXIT_FAILURE);
+			exit(0);
 		if (execve(data->cmd[0].split[0], data->cmd[0].split, envp) < 0)
 		{
 			perror("Could not execve");
-			exit(EXIT_FAILURE);
+			exit(0);
 		}
 	}
 }
@@ -64,7 +62,7 @@ void	child_2(t_data *data, int *fds, char **envp)
 	if (data->pid2 == -1)
 	{
 		perror("fork error");
-		exit(EXIT_FAILURE);
+		exit(0);
 	}
 	if (data->pid2 == 0)
 	{
@@ -73,10 +71,12 @@ void	child_2(t_data *data, int *fds, char **envp)
 		close (fds[0]);
 		close (data->file1);
 		close(data->file2);
+		if (data->file2 == -1)
+			exit(0);
 		if (execve(data->cmd[1].split[0], data->cmd[1].split, envp) < 0)
 		{
 			perror("Could not execve");
-			exit(EXIT_FAILURE);
+			exit(0);
 		}
 	}
 }
@@ -91,7 +91,7 @@ int	main(int ac, char *av[], char *envp[])
 	if (pipe(fds) == -1)
 	{
 		perror("pipe error");
-		exit(EXIT_FAILURE);
+		exit(0);
 	}
 	child_1(&data, fds, envp);
 	close(fds[1]);
