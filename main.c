@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:35:24 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/19 16:55:09 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/22 10:42:14 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	ini(t_data *data, int ac, char **av)
 	sep_arg(data);
 	if (path(data) < 0)
 	{
-		perror("command not found");
-		exit(0);
+		ft_printf("command not found");
+		exit(EXIT_FAILURE);
 	}
 /* 	int	i = 0;
 	while (data->cmd[1].split[i])

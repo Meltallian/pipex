@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 12:07:27 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/19 16:56:51 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/22 10:33:46 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ char	**ft_split_2(const char *s, const char c)
 	int		index;
 	char	**split;
 	bool	is_trig;
-	// bool	is_trigd = false;
 
 	helper_split_2(&i, &j, &is_trig, &index);
 	split = ft_calloc((word_count(s, c) + 1), sizeof(char *));
@@ -89,11 +88,9 @@ char	**ft_split_2(const char *s, const char c)
 	{
 		if (s[i] == 39)
 			is_trig = !is_trig;
-/* 		if (s[i] == 34)
-			is_trigd = !is_trigd; */
 		if (s[i] != c && index < 0)
 			index = i;
-		else if ((s[i] == c || i == ft_strlen(s)) && index >= 0 && !is_trig/*  && !is_trigd */)
+		else if ((s[i] == c || i == ft_strlen(s)) && index >= 0 && !is_trig)
 		{
 			split[j++] = ft_buff(s, index, i);
 			index = -1;
