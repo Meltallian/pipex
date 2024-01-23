@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 09:53:51 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/23 16:45:46 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/23 18:06:43 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@ int	ini(t_data *data, int ac, char **av)
 {
 	if (ac < 4)
 	{
-		perror("wrong synthax\n");
-		exit(1);
+		ft_putstr_fd("wrong synthax\n", 2);
+		exit (1);
 	}
 	parsing(data, ac, av);
 	sep_arg(data);
 	if (path(data) < 0)
 	{
-		perror("command not found\n");
-		exit(0);
+		ft_putstr_fd("command not found\n", 2);
+		/// exit(0);
 	}
 	qawk(data);
 	return (0);
@@ -42,7 +42,7 @@ int	main(int ac, char *av[], char *envp[])
 	{
 		if (pipe(fds[i]) == -1)
 		{
-			perror("pipe error");
+			ft_putstr_fd("fork error\n", 2);
 			exit(0);
 		}
 		i++;

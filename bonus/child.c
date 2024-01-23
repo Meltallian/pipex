@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 10:45:02 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/23 16:30:10 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/23 18:04:29 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	child(t_data *data, int (*fds)[2], char **envp, int i)
 	pid = fork();
 	if (pid == -1)
 	{
-		perror("fork error");
+		ft_putstr_fd("fork error\n", 2);
 		exit(0);
 	}
 	if (pid == 0)
@@ -38,7 +38,7 @@ void	child(t_data *data, int (*fds)[2], char **envp, int i)
 		}
 		if (execve(data->cmd[i].split[0], data->cmd[i].split, envp) < 0)
 		{
-			perror("Could not execve");
+			ft_putstr_fd("Could not execve\n", 2);
 			exit(0);
 		}
 	}
@@ -52,7 +52,7 @@ void	child_start(t_data *data, int (*fds)[2], char **envp)
 	data->pid = fork();
 	if (data->pid == -1)
 	{
-		perror("fork error");
+		ft_putstr_fd("fork error\n", 2);
 		exit(0);
 	}
 	if (data->pid == 0)
@@ -71,7 +71,7 @@ void	child_start(t_data *data, int (*fds)[2], char **envp)
 			exit(0);
 		if (execve(data->cmd[0].split[0], data->cmd[0].split, envp) < 0)
 		{
-			perror("Could not execve");
+			ft_putstr_fd("Could not execve\n", 2);
 			exit(0);
 		}
 	}
@@ -85,7 +85,7 @@ void	child_end(t_data *data, int (*fds)[2], char **envp, int	i)
 	data->pid2 = fork();
 	if (data->pid2 == -1)
 	{
-		perror("fork error");
+		ft_putstr_fd("fork error\n", 2);
 		exit(0);
 	}
 	if (data->pid2 == 0)
@@ -104,7 +104,7 @@ void	child_end(t_data *data, int (*fds)[2], char **envp, int	i)
 			exit(0);
 		if (execve(data->cmd[i].split[0], data->cmd[i].split, envp) < 0)
 		{
-			perror("Could not execve");
+			ft_putstr_fd("Could not execve\n", 2);
 			exit(0);
 		}
 	}
