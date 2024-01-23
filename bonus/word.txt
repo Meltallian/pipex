@@ -5,3 +5,6 @@ apple
 Cherry
 Hogger
 Schlonger
+schlagger
+schlaggerio
+schlouger

@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 14:54:17 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/23 11:57:58 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/23 15:16:35 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@
 # include "../libft/libft.h"
 # include <errno.h>
 
-// # define PP ft_printf("prout")
-// # define DD(xxx) ft_printf("%d", xxx)
-// # define SS(xxx) ft_printf("%s", xxx)
-// # define CC(xxx) ft_printf("%c", xxx)
+# define PP ft_printf("prout")
+# define DD(xxx) ft_printf("%d", xxx)
+# define SS(xxx) ft_printf("%s", xxx)
+# define CC(xxx) ft_printf("%c", xxx)
 
 typedef struct s_cmd
 {
@@ -51,8 +51,9 @@ void	helper_fd_files(int ac, char **av, int i);
 void	fd_files(int ac, char **av);
 void	parsing(t_data *data, int ac, char **av);
 void	clean(t_data *data);
-void	child_start(t_data *data, int *fds, char **envp);
-void	child_end(t_data *data, int *fds, char **envp);
+void	child_start(t_data *data, int (*fds)[2], char **envp);
+void	child(t_data *data, int (*fds)[2], char **envp, int i);
+void	child_end(t_data *data, int (*fds)[2], char **envp, int i);
 void	qawk(t_data *data);
 char	**ft_split_2(const char *s, const char c);
 int		wait_last(int last_pid);
