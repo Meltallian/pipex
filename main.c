@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:35:24 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/23 17:23:42 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/23 17:36:51 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ini(t_data *data, int ac, char **av)
 	if (path(data) < 0)
 	{
 		ft_putstr_fd("command not found\n", 2);
-		// exit(0);
+		/// exit(0);
 	}
 	qawk(data);
 	return (0);
@@ -48,7 +48,6 @@ void	child_1(t_data *data, int *fds, char **envp)
 		close(fds[0]);
 		if (data->file1 == -1)
 			exit(0);
-		execve(data->cmd[0].split[0], data->cmd[0].split, envp);
 		if (execve(data->cmd[0].split[0], data->cmd[0].split, envp) < 0)
 		{
 			// ft_putstr_fd("Could not execve\n", 2);
@@ -74,7 +73,6 @@ void	child_2(t_data *data, int *fds, char **envp)
 		close(data->file2);
 		if (data->file2 == -1)
 			exit(0);
-		execve(data->cmd[1].split[0], data->cmd[1].split, envp);
 		if (execve(data->cmd[1].split[0], data->cmd[1].split, envp) < 0)
 		{
 			ft_putstr_fd("Could not execve\n", 2);
