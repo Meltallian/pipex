@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 09:53:51 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/23 16:29:18 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/23 16:45:46 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int	ini(t_data *data, int ac, char **av)
 {
-	// if (ac != 5)
-	// {
-	// 	perror("wrong synthax\n");
-	// 	exit(1);
-	// }
+	if (ac < 4)
+	{
+		perror("wrong synthax\n");
+		exit(1);
+	}
 	parsing(data, ac, av);
 	sep_arg(data);
 	if (path(data) < 0)

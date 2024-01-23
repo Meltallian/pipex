@@ -1,3 +1,5 @@
+pear
+peaches
 apple
 schlagger
 schlaggerio
