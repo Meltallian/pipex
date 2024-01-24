@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 09:53:51 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/23 18:06:43 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/24 11:46:06 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	ini(t_data *data, int ac, char **av)
 	if (path(data) < 0)
 	{
 		ft_putstr_fd("command not found\n", 2);
-		/// exit(0);
 	}
 	qawk(data);
 	return (0);
