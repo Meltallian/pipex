@@ -6,13 +6,13 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:19:59 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/23 10:40:21 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/24 14:34:24 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-void	clean(t_data *data)
+void	clean(t_data *data, int **fds, int ac)
 {
 	int	i;
 	int	j;
@@ -30,6 +30,13 @@ void	clean(t_data *data)
 		i++;
 	}
 	free(data->cmd);
+	i = 0;
+	while (i < ac - 4)
+	{
+		free(fds[i]);
+		i++;
+	}
+	free(fds);
 }
 
 void	sep_arg(t_data *data)

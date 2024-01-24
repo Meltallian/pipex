@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 14:54:17 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/24 14:07:11 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/24 14:34:01 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ int		path(t_data *data);
 void	helper_fd_files(int ac, char **av, int i);
 void	fd_files(int ac, char **av);
 void	parsing(t_data *data, int ac, char **av);
-void	clean(t_data *data);
-void	child_start(t_data *data, int (*fds)[2], char **envp);
-void	child(t_data *data, int (*fds)[2], char **envp, int i);
-void	child_end(t_data *data, int (*fds)[2], char **envp, int i);
+void	clean(t_data *data, int **fds, int ac);
+void	child_start(t_data *data, int **fds, char **envp);
+void	child(t_data *data, int **fds, char **envp, int i);
+void	child_end(t_data *data, int **fds, char **envp, int i);
 void	qawk(t_data *data);
 char	**ft_split_2(const char *s, const char c);
 int		wait_last(int last_pid);
-void	main_helper(t_data *data, int (*fds)[2], int ac, char *envp[]);
+void	main_helper(t_data *data, int **fds, int ac, char *envp[]);
 
 #endif /* PIPEX_BONUS_H */

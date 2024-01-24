@@ -6,13 +6,13 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 10:45:02 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/24 14:07:39 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/24 15:02:43 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-void	child(t_data *data, int (*fds)[2], char **envp, int i)
+void	child(t_data *data, int **fds, char **envp, int i)
 {
 	pid_t	pid;
 	int		j;
@@ -41,11 +41,21 @@ void	child(t_data *data, int (*fds)[2], char **envp, int i)
 	}
 }
 
-void	child_start(t_data *data, int (*fds)[2], char **envp)
+void	fd_closing(t_data *data, int **fds)
 {
 	int	j;
 
 	j = 0;
+	while (j < data->cmd_y - 1)
+	{
+		close (fds[j][0]);
+		close (fds[j][1]);
+		j++;
+	}
+}
+
+void	child_start(t_data *data, int **fds, char **envp)
+{
 	data->pid = fork();
 	if (data->pid == -1)
 	{
@@ -58,12 +68,7 @@ void	child_start(t_data *data, int (*fds)[2], char **envp)
 		dup2(fds[0][1], STDOUT_FILENO);
 		close(data->file1);
 		close(data->file2);
-		while (j < data->cmd_y - 1)
-		{
-			close (fds[j][0]);
-			close (fds[j][1]);
-			j++;
-		}
+		fd_closing(data, fds);
 		if (data->file1 == -1)
 			exit(0);
 		if (execve(data->cmd[0].split[0], data->cmd[0].split, envp) < 0)
@@ -71,11 +76,8 @@ void	child_start(t_data *data, int (*fds)[2], char **envp)
 	}
 }
 
-void	child_end(t_data *data, int (*fds)[2], char **envp, int	i)
+void	child_end(t_data *data, int **fds, char **envp, int i)
 {
-	int	j;
-
-	j = 0;
 	data->pid2 = fork();
 	if (data->pid2 == -1)
 	{
@@ -88,12 +90,7 @@ void	child_end(t_data *data, int (*fds)[2], char **envp, int	i)
 		dup2(data->file2, STDOUT_FILENO);
 		close(data->file1);
 		close(data->file2);
-		while (j < data->cmd_y - 1)
-		{
-			close (fds[j][0]);
-			close (fds[j][1]);
-			j++;
-		}
+		fd_closing(data, fds);
 		if (data->file2 == -1)
 			exit(0);
 		if (execve(data->cmd[i].split[0], data->cmd[i].split, envp) < 0)

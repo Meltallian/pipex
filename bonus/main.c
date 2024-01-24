@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 09:53:51 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/24 14:20:13 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/24 14:33:54 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,10 @@ int	ini(t_data *data, int ac, char **av)
 		ft_putstr_fd("command not found\n", 2);
 	}
 	qawk(data);
-	data->ac = ac;
 	return (0);
 }
 
-void	main_helper(t_data *data, int (*fds)[2], int ac, char *envp[])
+void	main_helper(t_data *data, int **fds, int ac, char *envp[])
 {
 	int	i;
 
@@ -54,16 +53,18 @@ void	main_helper(t_data *data, int (*fds)[2], int ac, char *envp[])
 int	main(int ac, char *av[], char *envp[])
 {
 	t_data	data;
-	int		fds[ac - 4][2];
+	int		**fds;
 	int		i;
 
-	i = 0;
 	ini(&data, ac, av);
+	fds = malloc((ac - 4) * sizeof(int *));
+	i = 0;
 	while (i < ac - 4)
 	{
+		fds[i] = malloc(2 * sizeof(int));
 		if (pipe(fds[i]) == -1)
 		{
-			ft_putstr_fd("fork error\n", 2);
+			ft_putstr_fd("pipe error\n", 2);
 			exit(0);
 		}
 		i++;
@@ -71,6 +72,6 @@ int	main(int ac, char *av[], char *envp[])
 	main_helper(&data, fds, ac, envp);
 	close(data.file1);
 	close(data.file2);
-	clean(&data);
+	clean(&data, fds, ac);
 	return (wait_last(data.pid2));
 }
