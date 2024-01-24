@@ -6,18 +6,29 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 10:45:02 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/24 15:02:43 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/24 15:08:49 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
+void	fd_closing(t_data *data, int **fds)
+{
+	int	j;
+
+	j = 0;
+	while (j < data->cmd_y - 1)
+	{
+		close (fds[j][0]);
+		close (fds[j][1]);
+		j++;
+	}
+}
+
 void	child(t_data *data, int **fds, char **envp, int i)
 {
 	pid_t	pid;
-	int		j;
 
-	j = 0;
 	pid = fork();
 	if (pid == -1)
 	{
@@ -30,27 +41,9 @@ void	child(t_data *data, int **fds, char **envp, int i)
 		dup2(fds[i][1], STDOUT_FILENO);
 		close(data->file1);
 		close(data->file2);
-		while (j < data->cmd_y - 1)
-		{
-			close (fds[j][0]);
-			close (fds[j][1]);
-			j++;
-		}
+		fd_closing(data, fds);
 		if (execve(data->cmd[i].split[0], data->cmd[i].split, envp) < 0)
 			exit(0);
-	}
-}
-
-void	fd_closing(t_data *data, int **fds)
-{
-	int	j;
-
-	j = 0;
-	while (j < data->cmd_y - 1)
-	{
-		close (fds[j][0]);
-		close (fds[j][1]);
-		j++;
 	}
 }
 

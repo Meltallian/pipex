@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 14:54:17 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/24 14:34:01 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/24 15:08:57 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,6 @@ void	qawk(t_data *data);
 char	**ft_split_2(const char *s, const char c);
 int		wait_last(int last_pid);
 void	main_helper(t_data *data, int **fds, int ac, char *envp[]);
+void	fd_closing(t_data *data, int **fds);
 
 #endif /* PIPEX_BONUS_H */
