@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 14:54:17 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/23 15:16:35 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/24 14:07:11 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@
 # include "../libft/libft.h"
 # include <errno.h>
 
-# define PP ft_printf("prout")
-# define DD(xxx) ft_printf("%d", xxx)
-# define SS(xxx) ft_printf("%s", xxx)
-# define CC(xxx) ft_printf("%c", xxx)
+// # define PP ft_printf("prout")
+// # define DD(xxx) ft_printf("%d", xxx)
+// # define SS(xxx) ft_printf("%s", xxx)
+// # define CC(xxx) ft_printf("%c", xxx)
 
 typedef struct s_cmd
 {
@@ -57,5 +57,6 @@ void	child_end(t_data *data, int (*fds)[2], char **envp, int i);
 void	qawk(t_data *data);
 char	**ft_split_2(const char *s, const char c);
 int		wait_last(int last_pid);
+void	main_helper(t_data *data, int (*fds)[2], int ac, char *envp[]);
 
 #endif /* PIPEX_BONUS_H */

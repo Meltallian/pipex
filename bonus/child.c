@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 10:45:02 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/24 11:43:59 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/24 14:07:39 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,7 @@ void	child(t_data *data, int (*fds)[2], char **envp, int i)
 			j++;
 		}
 		if (execve(data->cmd[i].split[0], data->cmd[i].split, envp) < 0)
-		{
-			ft_putstr_fd("Could not execve\n", 2);
 			exit(0);
-		}
 	}
 }
 
@@ -70,10 +67,7 @@ void	child_start(t_data *data, int (*fds)[2], char **envp)
 		if (data->file1 == -1)
 			exit(0);
 		if (execve(data->cmd[0].split[0], data->cmd[0].split, envp) < 0)
-		{
-			ft_putstr_fd("Could not execve\n", 2);
 			exit(0);
-		}
 	}
 }
 
@@ -103,9 +97,6 @@ void	child_end(t_data *data, int (*fds)[2], char **envp, int	i)
 		if (data->file2 == -1)
 			exit(0);
 		if (execve(data->cmd[i].split[0], data->cmd[i].split, envp) < 0)
-		{
-			ft_putstr_fd("Could not execve\n", 2);
 			exit(0);
-		}
 	}
 }
