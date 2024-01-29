@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:17:18 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/24 11:06:22 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/29 13:47:14 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	path(t_data *data)
 	return (0);
 }
 
-void	helper_fd_files(int ac, char **av, int i)
+void	helper_fd_files(int ac, char **av, int i, int j)
 {
 	if (access(av[ac - 1], F_OK) != 0 && i == 1)
 	{
@@ -73,7 +73,7 @@ void	helper_fd_files(int ac, char **av, int i)
 		ft_putstr_fd("\n", 2);
 		exit(0);
 	}
-	else if (access(av[ac - 1], W_OK != 0) && i == 1)
+	else if (access(av[ac - 1], W_OK != 0) && i == 1 && j == 0)
 	{
 		ft_putstr_fd("permission denied: ", 2);
 		ft_putstr_fd(av[ac - 1], 2);
@@ -92,14 +92,17 @@ void	helper_fd_files(int ac, char **av, int i)
 void	fd_files(int ac, char **av)
 {
 	int	i;
+	int	j;
 
 	i = 0;
+	j = 0;
 	if (access(av[1], F_OK) != 0)
 	{
 		ft_putstr_fd("no such file or directory: ", 2);
 		ft_putstr_fd(av[1], 2);
 		ft_putstr_fd("\n", 2);
 		i = 1;
+		j++;
 	}
 	else if (access(av[1], R_OK) != 0)
 	{
@@ -108,7 +111,7 @@ void	fd_files(int ac, char **av)
 		ft_putstr_fd("\n", 2);
 		i = 1;
 	}
-	helper_fd_files(ac, av, i);
+	helper_fd_files(ac, av, i, j);
 }
 
 void	parsing(t_data *data, int ac, char **av)
@@ -124,7 +127,17 @@ void	parsing(t_data *data, int ac, char **av)
 		data->cmd[i - 2].cmd = av[i];
 		i++;
 	}
+	i = 0;
 	data->cmd_y = ac - 3;
+	while (i < data->cmd_y)
+	{
+		if (empty_or_space(data->cmd[i].cmd) == 1)
+		{
+			ft_putstr_fd("command not found\n", 2);
+			exit (1);
+		}
+		i++;
+	}
 	fd_files(ac, av);
 	data->file1 = open(av[1], O_RDONLY);
 	data->file2 = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);

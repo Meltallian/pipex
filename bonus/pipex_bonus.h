@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 14:54:17 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/24 15:08:57 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/29 13:47:42 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_data
 void	sep_arg(t_data *data);
 int		path_helper(t_data *data, int k, char *full_path);
 int		path(t_data *data);
-void	helper_fd_files(int ac, char **av, int i);
+void	helper_fd_files(int ac, char **av, int i, int j);
 void	fd_files(int ac, char **av);
 void	parsing(t_data *data, int ac, char **av);
 void	clean(t_data *data, int **fds, int ac);
@@ -59,5 +59,6 @@ char	**ft_split_2(const char *s, const char c);
 int		wait_last(int last_pid);
 void	main_helper(t_data *data, int **fds, int ac, char *envp[]);
 void	fd_closing(t_data *data, int **fds);
+int		empty_or_space(char *str);
 
 #endif /* PIPEX_BONUS_H */

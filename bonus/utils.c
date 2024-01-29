@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:19:59 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/24 14:34:24 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/29 13:47:34 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,18 @@ void	clean(t_data *data, int **fds, int ac)
 		i++;
 	}
 	free(fds);
+}
+
+int	empty_or_space(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[0] == '\0')
+		return (1);
+	if (str[0] == ' ')
+		return (1);
+	return (0);
 }
 
 void	sep_arg(t_data *data)
