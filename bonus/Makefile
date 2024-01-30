@@ -3,7 +3,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g
 NAME = pipex_bonus
 LIBFT = ../libft/libft.a
-PIPEX_BONUS_SRC = main.c ft_split_2.c path.c utils.c child.c
+PIPEX_BONUS_SRC = main.c ft_split_2.c path.c utils.c child.c parsing.c
 PIPEX_BONUS_OBJ = $(PIPEX_BONUS_SRC:.c=.o)
 INCLUDES_DIR = -I../includes -I../libft
 #pas necessaire parceque -lft -lmlx dans la ligne cc
