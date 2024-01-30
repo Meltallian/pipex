@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:17:18 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/30 12:01:11 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/30 13:59:19 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 
 void	helper_fd_files(int ac, char **av, int i)
 {
-	// if (access(av[ac - 1], F_OK) != 0 && i == 1)
-	// {
-	// 	ft_putstr_fd("no such file or directory: ", 2);
-	// 	ft_putstr_fd(av[ac - 1], 2);
-	// 	ft_putstr_fd("\n", 2);
-	// 	exit(0);
-	// }
-	if (access(av[ac - 1], W_OK) != 0 && i == 1)
+	if (access(av[ac - 1], F_OK) != 0 && i == 1)
+	{
+		ft_putstr_fd("no such file or directory: ", 2);
+		ft_putstr_fd(av[ac - 1], 2);
+		ft_putstr_fd("\n", 2);
+		exit(0);
+	}
+	else if (access(av[ac - 1], W_OK) != 0 && i == 1)
 	{
 		ft_putstr_fd("permission denied: ", 2);
 		ft_putstr_fd(av[ac - 1], 2);
