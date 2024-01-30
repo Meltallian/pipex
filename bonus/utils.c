@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:19:59 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/29 13:47:34 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/30 11:37:38 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ void	clean(t_data *data, int **fds, int ac)
 	free(fds);
 }
 
+/**
+ * @brief returns 1 if string is empty and 2 if cell 0 of string is a space.
+ *
+ * @param str
+ * @return int
+ */
 int	empty_or_space(char *str)
 {
 	int	i;
@@ -47,7 +53,7 @@ int	empty_or_space(char *str)
 	if (str[0] == '\0')
 		return (1);
 	if (str[0] == ' ')
-		return (1);
+		return (2);
 	return (0);
 }
 
