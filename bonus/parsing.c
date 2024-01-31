@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:06:57 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/31 10:09:32 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/31 10:13:32 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	helper_fd_files(int ac, char **av, int i, int j)
 		ft_putstr_fd("\n", 2);
 		exit(0);
 	}
-	else if (open(av[ac - 1], O_DIRECTORY) != 0)
+	else if (open(av[ac - 1], O_DIRECTORY) != 0 && i == 1)
 	{
 		ft_putstr_fd("is a directory: ", 2);
 		ft_putstr_fd(av[ac - 1], 2);
