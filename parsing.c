@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:17:18 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/31 10:12:46 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/31 13:50:35 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,6 @@ void	helper_fd_files(int ac, char **av, int i, int j)
 	if (access(av[ac - 1], F_OK) != 0 && i == 1 && j == 0)
 	{
 		ft_putstr_fd("no such file or directory: ", 2);
-		ft_putstr_fd(av[ac - 1], 2);
-		ft_putstr_fd("\n", 2);
-		exit(0);
-	}
-	else if (open(av[ac - 1], O_DIRECTORY) != 0 && i == 1)
-	{
-		ft_putstr_fd("is a directory: ", 2);
 		ft_putstr_fd(av[ac - 1], 2);
 		ft_putstr_fd("\n", 2);
 		exit(0);
