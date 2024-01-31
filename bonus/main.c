@@ -6,7 +6,7 @@
 /*   By: jbidaux <jeremie.bidaux@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 09:53:51 by jbidaux           #+#    #+#             */
-/*   Updated: 2024/01/30 14:09:31 by jbidaux          ###   ########.fr       */
+/*   Updated: 2024/01/31 10:02:43 by jbidaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ini(t_data *data, int ac, char **av)
 {
 	if (ac < 5)
 	{
-		ft_putstr_fd("wrong synthax\n", 2);
+		ft_putstr_fd("wrong syntax\n", 2);
 		exit (1);
 	}
 	parsing(data, ac, av);
